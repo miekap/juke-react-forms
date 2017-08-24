@@ -1,8 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Sidebar = (props) => {
+// const Sidebar = (props) => {
 
+export default class Sidebar extends Component {
+
+  constructor () {
+    super();
+    this.state = {
+      playlists:[]
+    };
+  }
+  
+  componentDidMount () {
+    axios.get('/api/playlists/')
+      .then(res => res.data)
+      .then(playlists => {
+        this.setState({ playlists })
+      })
+  }
+  render() {
   return (
     <sidebar>
       <img src="juke.svg" className="logo" />
@@ -37,5 +54,9 @@ const Sidebar = (props) => {
     </sidebar>
   );
 }
+}
+ 
+
 
 export default Sidebar;
+
